@@ -31,7 +31,7 @@
         background: #a0aec0; /* gray-400 */
       }
 
-      /* Walking Animations */
+      /* Animations */
       @keyframes walk-arm-l {
         0%, 100% { transform: translateZ(40px) rotateY(0deg) rotateX(20deg); }
         50% { transform: translateZ(40px) rotateY(0deg) rotateX(-20deg); }
@@ -48,11 +48,22 @@
         0%, 100% { transform: translateZ(1px) rotateY(0deg) rotateX(-25deg); }
         50% { transform: translateZ(1px) rotateY(0deg) rotateX(25deg); }
       }
+      @keyframes attack-arm-r {
+        0% { transform: translateZ(40px) rotateY(0deg) rotateX(-20deg); }
+        50% { transform: translateZ(40px) rotateY(-40deg) rotateX(90deg); }
+        100% { transform: translateZ(40px) rotateY(0deg) rotateX(-20deg); }
+      }
+      @keyframes death-poof {
+        from { transform: scale(1) rotate(0deg); opacity: 1; }
+        to { transform: scale(0) rotate(360deg); opacity: 0; }
+      }
 
       .animate-walk-arm-l { animation: walk-arm-l 0.5s ease-in-out infinite; }
       .animate-walk-arm-r { animation: walk-arm-r 0.5s ease-in-out infinite; }
       .animate-walk-leg-l { animation: walk-leg-l 0.5s ease-in-out infinite; }
       .animate-walk-leg-r { animation: walk-leg-r 0.5s ease-in-out infinite; }
+      .animate-attack-arm-r { animation: attack-arm-r 0.3s ease-out; }
+      .animate-death-poof { animation: death-poof 0.4s ease-in forwards; }
       
       /* 3D Styles */
       .perspective {

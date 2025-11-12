@@ -43,6 +43,7 @@ export const SHOP_ITEMS: ShopItem[] = [
         name: 'Pixel Sword', 
         cost: 250, 
         type: 'weapon', 
+        damage: 25,
         style: 'w-5 h-20 bg-gray-400 border-2 border-black -rotate-45',
         visual: {
             style: 'w-6 h-24 bg-gray-400 border-2 border-black absolute',
@@ -54,6 +55,7 @@ export const SHOP_ITEMS: ShopItem[] = [
         name: 'Bolt Blaster', 
         cost: 400, 
         type: 'weapon', 
+        damage: 40,
         style: 'w-16 h-10 bg-red-600 border-2 border-black',
         visual: {
             style: 'w-20 h-12 bg-red-600 border-2 border-black absolute',

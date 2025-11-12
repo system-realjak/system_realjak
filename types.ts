@@ -30,8 +30,12 @@ export interface Bot {
   character: CharacterStyle;
   position: Position;
   target: Position;
-  status: 'wandering' | 'idle';
+  status: 'wandering' | 'idle' | 'dying' | 'dead';
   idleUntil: number;
+  lastMessage?: { text: string; id: number; };
+  hp: number;
+  maxHp: number;
+  respawnAt: number;
 }
 
 export interface GameMap {
@@ -71,8 +75,26 @@ export interface ShopItem {
   cost: number;
   type: 'weapon' | 'gear';
   style: string;
+  damage?: number;
   visual: {
     style: string;
     transform: string;
   }
+}
+
+export interface Friend {
+    id: string; 
+    name: string;
+    serverCode: string; 
+    isOnline: boolean;
+}
+
+export type ContextMenuTarget = 
+    | { type: 'bot'; data: Bot }
+    | { type: 'player'; data: { id: string, name: string, character: CharacterStyle } };
+
+export interface ContextMenuData {
+    x: number;
+    y: number;
+    target: ContextMenuTarget;
 }

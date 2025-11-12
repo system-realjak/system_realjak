@@ -7,11 +7,14 @@ interface HudProps {
   hp: number;
   maxHp: number;
   gameModeName: string;
+  serverCode: string | null;
   onOpenSkins: () => void;
   onOpenWorldChanger: () => void;
   onOpenMapMaker: () => void;
   onOpenShop: () => void;
+  onOpenFriends: () => void;
   onHeal: () => void;
+  onGoToTitleScreen: () => void;
 }
 
 const CoinIcon: React.FC = () => (
@@ -33,11 +36,21 @@ const ShopIcon: React.FC<{className?: string}> = ({className}) => (
     </svg>
 );
 
+const FriendsIcon: React.FC<{className?: string}> = ({className}) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className || "h-5 w-5 text-white"} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21a6 6 0 00-9-5.197m0 0A5.975 5.975 0 0112 13a5.975 5.975 0 013 5.197M15 21a6 6 0 00-9-5.197M9 11a3 3 0 116 0 3 3 0 01-6 0z" />
+    </svg>
+);
 
-export const Hud: React.FC<HudProps> = ({ bobux, playerName, hp, maxHp, gameModeName, onOpenSkins, onOpenWorldChanger, onOpenMapMaker, onOpenShop, onHeal }) => {
+
+export const Hud: React.FC<HudProps> = ({ bobux, playerName, hp, maxHp, gameModeName, serverCode, onOpenSkins, onOpenWorldChanger, onOpenMapMaker, onOpenShop, onOpenFriends, onHeal, onGoToTitleScreen }) => {
     const hpPercentage = (hp / maxHp) * 100;
 
   return (
+    <>
+    <div className="absolute top-4 left-4 bg-black bg-opacity-60 p-2 rounded-lg shadow-lg backdrop-blur-sm">
+        <p className="text-white font-bold text-sm">SERVER: <span className="font-game text-yellow-400 tracking-widest">{serverCode}</span></p>
+    </div>
     <div className="absolute top-4 right-4 flex flex-col items-end gap-3 w-64">
         <div className="bg-black bg-opacity-60 p-3 rounded-lg shadow-lg flex flex-col items-stretch gap-3 w-full backdrop-blur-sm">
             <div className="flex justify-between items-center">
@@ -93,12 +106,25 @@ export const Hud: React.FC<HudProps> = ({ bobux, playerName, hp, maxHp, gameMode
                 <ShopIcon className="h-5 w-5"/> Shop
             </button>
             <button 
+                onClick={onOpenFriends}
+                className="bg-teal-600 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-teal-700 transition-colors duration-200 border-2 border-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-400 w-full flex items-center justify-center gap-2"
+            >
+                <FriendsIcon className="h-5 w-5"/> Friends
+            </button>
+             <button 
                 onClick={onOpenMapMaker}
                 className="bg-gray-600 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-gray-700 transition-colors duration-200 border-2 border-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 w-full"
             >
                 Map Maker
             </button>
+            <button 
+                onClick={onGoToTitleScreen}
+                className="bg-red-700 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-red-800 transition-colors duration-200 border-2 border-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 w-full"
+            >
+                Back to Title
+            </button>
         </div>
     </div>
+    </>
   );
 };

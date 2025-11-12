@@ -1,9 +1,11 @@
 import React from 'react';
-import type { Coin, Bot, CharacterStyle, Position, GameMap, MapObject, ShopItem } from '../types';
+import type { Coin, Bot, CharacterStyle, Position, GameMap, MapObject, ShopItem, ContextMenuTarget } from '../types';
 import { Player } from './Player';
 import { BotPlayer } from './BotPlayer';
 import { CoinComponent } from './Coin';
 import { MapObjectComponent } from './MapObjectComponent';
+
+type LastMessage = { text: string; id: number; } | null;
 
 interface GameScreenProps {
   map: GameMap;
@@ -14,7 +16,10 @@ interface GameScreenProps {
   playerName: string;
   playerPosition: Position;
   isPlayerMoving: boolean;
+  isPlayerAttacking: boolean;
+  playerLastMessage: LastMessage;
   equippedItem?: ShopItem;
+  onPlayerClick: (target: ContextMenuTarget, event: React.MouseEvent) => void;
   viewportWidth: number;
   viewportHeight: number;
   worldWidth: number;
@@ -30,7 +35,10 @@ export const GameScreen: React.FC<GameScreenProps> = ({
   playerName,
   playerPosition, 
   isPlayerMoving,
+  isPlayerAttacking,
+  playerLastMessage,
   equippedItem,
+  onPlayerClick,
   viewportWidth, 
   viewportHeight,
   worldWidth,
@@ -62,14 +70,17 @@ export const GameScreen: React.FC<GameScreenProps> = ({
           <MapObjectComponent key={obj.id} object={obj} />
         ))}
         {bots.map(bot => (
-          <BotPlayer key={bot.id} bot={bot} />
+          <BotPlayer key={bot.id} bot={bot} onPlayerClick={onPlayerClick} />
         ))}
         <Player 
           character={playerCharacter} 
           position={playerPosition} 
           name={playerName}
-          isMoving={isPlayerMoving} 
+          isMoving={isPlayerMoving}
+          isAttacking={isPlayerAttacking}
+          lastMessage={playerLastMessage}
           equippedItem={equippedItem}
+          onPlayerClick={onPlayerClick}
         />
         {coins.map(coin => (
           <CoinComponent key={coin.id} coin={coin} />
