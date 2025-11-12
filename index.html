@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bobux Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .font-game {
+        font-family: 'Press Start 2P', cursive;
+      }
+      /* Custom scrollbar for chat */
+      .chat-box::-webkit-scrollbar {
+        width: 8px;
+      }
+      .chat-box::-webkit-scrollbar-track {
+        background: #2d3748; /* gray-800 */
+      }
+      .chat-box::-webkit-scrollbar-thumb {
+        background: #718096; /* gray-500 */
+        border-radius: 4px;
+      }
+      .chat-box::-webkit-scrollbar-thumb:hover {
+        background: #a0aec0; /* gray-400 */
+      }
+
+      /* Walking Animations */
+      @keyframes walk-arm-l {
+        0%, 100% { transform: translateZ(40px) rotateY(0deg) rotateX(20deg); }
+        50% { transform: translateZ(40px) rotateY(0deg) rotateX(-20deg); }
+      }
+      @keyframes walk-arm-r {
+        0%, 100% { transform: translateZ(40px) rotateY(0deg) rotateX(-20deg); }
+        50% { transform: translateZ(40px) rotateY(0deg) rotateX(20deg); }
+      }
+      @keyframes walk-leg-l {
+        0%, 100% { transform: translateZ(1px) rotateY(0deg) rotateX(25deg); }
+        50% { transform: translateZ(1px) rotateY(0deg) rotateX(-25deg); }
+      }
+      @keyframes walk-leg-r {
+        0%, 100% { transform: translateZ(1px) rotateY(0deg) rotateX(-25deg); }
+        50% { transform: translateZ(1px) rotateY(0deg) rotateX(25deg); }
+      }
+
+      .animate-walk-arm-l { animation: walk-arm-l 0.5s ease-in-out infinite; }
+      .animate-walk-arm-r { animation: walk-arm-r 0.5s ease-in-out infinite; }
+      .animate-walk-leg-l { animation: walk-leg-l 0.5s ease-in-out infinite; }
+      .animate-walk-leg-r { animation: walk-leg-r 0.5s ease-in-out infinite; }
+      
+      /* 3D Styles */
+      .perspective {
+        perspective: 1200px;
+      }
+      .preserve-3d {
+        transform-style: preserve-3d;
+      }
+      .world-rotation {
+        transform: rotateX(60deg);
+      }
+      .object-3d {
+        transform-style: preserve-3d;
+        transform: translateZ(1px); /* Base height to prevent z-fighting with floor */
+      }
+
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^0.14.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
